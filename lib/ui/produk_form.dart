@@ -11,7 +11,7 @@ class ProdukForm extends StatefulWidget {
 
 class _ProdukFormState extends State<ProdukForm> {
   final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
+
   String judul = "TAMBAH PRODUK";
   String tombolSubmit = "SIMPAN";
 
@@ -22,22 +22,13 @@ class _ProdukFormState extends State<ProdukForm> {
   @override
   void initState() {
     super.initState();
-    isUpdate();
-  }
-
-  isUpdate() {
     if (widget.produk != null) {
-      setState(() {
-        judul = "UBAH PRODUK";
-        tombolSubmit = "UBAH";
-        _kodeProdukTextboxController.text = widget.produk!.kodeProduk!;
-        _namaProdukTextboxController.text = widget.produk!.namaProduk!;
-        _hargaProdukTextboxController.text = widget.produk!.hargaProduk
-            .toString();
-      });
-    } else {
-      judul = "TAMBAH PRODUK DYAH";
-      tombolSubmit = "SIMPAN";
+      judul = "UBAH PRODUK";
+      tombolSubmit = "UBAH";
+      _kodeProdukTextboxController.text = widget.produk!.kodeProduk!;
+      _namaProdukTextboxController.text = widget.produk!.namaProduk!;
+      _hargaProdukTextboxController.text =
+          widget.produk!.hargaProduk.toString();
     }
   }
 
@@ -47,76 +38,67 @@ class _ProdukFormState extends State<ProdukForm> {
       appBar: AppBar(title: Text(judul)),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                _kodeProdukTextField(),
-                _namaProdukTextField(),
-                _hargaProdukTextField(),
-                _buttonSubmit(),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: "Kode Produk"),
+                  controller: _kodeProdukTextboxController,
+                  validator: (value) =>
+                      value!.isEmpty ? "Kode Produk harus diisi" : null,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: "Nama Produk"),
+                  controller: _namaProdukTextboxController,
+                  validator: (value) =>
+                      value!.isEmpty ? "Nama Produk harus diisi" : null,
+                ),
+                TextFormField(
+                  decoration: const InputDecoration(labelText: "Harga"),
+                  keyboardType: TextInputType.number,
+                  controller: _hargaProdukTextboxController,
+                  validator: (value) =>
+                      value!.isEmpty ? "Harga harus diisi" : null,
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[200],
+                    foregroundColor: Colors.black,
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      if (widget.produk == null) {
+                        Navigator.pop(
+                          context,
+                          Produk(
+                            kodeProduk: _kodeProdukTextboxController.text,
+                            namaProduk: _namaProdukTextboxController.text,
+                            hargaProduk: int.parse(
+                                _hargaProdukTextboxController.text),
+                          ),
+                        );
+                      } else {
+                        widget.produk!.kodeProduk =
+                            _kodeProdukTextboxController.text;
+                        widget.produk!.namaProduk =
+                            _namaProdukTextboxController.text;
+                        widget.produk!.hargaProduk = int.parse(
+                            _hargaProdukTextboxController.text);
+
+                        Navigator.pop(context, widget.produk);
+                      }
+                    }
+                  },
+                  child: Text(tombolSubmit),
+                )
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  Widget _kodeProdukTextField() {
-    return TextFormField(
-      decoration: const InputDecoration(labelText: "Kode Produk"),
-      keyboardType: TextInputType.text,
-      controller: _kodeProdukTextboxController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Kode Produk harus diisi";
-        }
-        return null;
-      },
-    );
-  }
-
-  Widget _namaProdukTextField() {
-    return TextFormField(
-      decoration: const InputDecoration(labelText: "Nama Produk"),
-      keyboardType: TextInputType.text,
-      controller: _namaProdukTextboxController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Nama Produk harus diisi";
-        }
-        return null;
-      },
-    );
-  }
-
-  Widget _hargaProdukTextField() {
-    return TextFormField(
-      decoration: const InputDecoration(labelText: "Harga"),
-      keyboardType: TextInputType.number,
-      controller: _hargaProdukTextboxController,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Harga harus diisi";
-        }
-        return null;
-      },
-    );
-  }
-
-  Widget _buttonSubmit() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.grey[200],
-        foregroundColor: Colors.black,
-        side: const BorderSide(color: Colors.grey),
-      ),
-      child: Text(tombolSubmit),
-      onPressed: () {
-        var validate = _formKey.currentState!.validate();
-      },
     );
   }
 }

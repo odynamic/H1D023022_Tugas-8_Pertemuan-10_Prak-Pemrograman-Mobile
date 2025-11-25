@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tokokita/ui/registrasi_page.dart';
+import 'package:tokokita/ui/produk_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,15 +11,13 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
-  bool isLoading = false;
-
   final _emailTextboxController = TextEditingController();
   final _passwordTextboxController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login "Dyah"')),
+      appBar: AppBar(title: const Text('Login Dyah')),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -56,7 +55,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget _passwordTextField() {
     return TextFormField(
       decoration: const InputDecoration(labelText: "Password"),
-      keyboardType: TextInputType.text,
       obscureText: true,
       controller: _passwordTextboxController,
       validator: (value) {
@@ -76,7 +74,13 @@ class _LoginPageState extends State<LoginPage> {
       ),
       child: const Text("Login"),
       onPressed: () {
-        var validate = _formKey.currentState!.validate();
+        bool valid = _formKey.currentState!.validate();
+        if (valid) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const ProdukPage()),
+          );
+        }
       },
     );
   }

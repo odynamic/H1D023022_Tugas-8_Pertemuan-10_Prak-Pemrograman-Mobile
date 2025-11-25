@@ -16,10 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(
           primarySwatch: Colors.blue,
-        ).copyWith(primary: Colors.blue),
+        ).copyWith(primary: const Color.fromARGB(255, 181, 8, 117)),
         useMaterial3: false,
       ),
-
       home: const ProdukPage(),
     );
   }

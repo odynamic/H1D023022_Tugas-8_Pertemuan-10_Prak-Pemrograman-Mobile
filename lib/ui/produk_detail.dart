@@ -16,22 +16,21 @@ class _ProdukDetailState extends State<ProdukDetail> {
     return Scaffold(
       appBar: AppBar(title: const Text('Detail Produk Dyah')),
       body: Center(
-        child: Column(
-          children: [
-            Text(
-              "Kode: ${widget.produk!.kodeProduk}",
-              style: const TextStyle(fontSize: 20.0),
-            ),
-            Text(
-              "Nama: ${widget.produk!.namaProduk}",
-              style: const TextStyle(fontSize: 18.0),
-            ),
-            Text(
-              "Harga: Rp. ${widget.produk!.hargaProduk}",
-              style: const TextStyle(fontSize: 18.0),
-            ),
-            _tombolHapusEdit(),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Kode: ${widget.produk!.kodeProduk}", style: const TextStyle(fontSize: 20)),
+              const SizedBox(height: 10),
+              Text("Nama: ${widget.produk!.namaProduk}", style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 10),
+              Text("Harga: Rp. ${widget.produk!.hargaProduk}", style: const TextStyle(fontSize: 18)),
+              const SizedBox(height: 25),
+              _tombolHapusEdit(),
+            ],
+          ),
         ),
       ),
     );
@@ -39,29 +38,21 @@ class _ProdukDetailState extends State<ProdukDetail> {
 
   Widget _tombolHapusEdit() {
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.green,
-            foregroundColor: Colors.white,
-          ),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.green, foregroundColor: Colors.white),
           child: const Text("EDIT"),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => app.ProdukForm(produk: widget.produk!),
-              ),
+              MaterialPageRoute(builder: (context) => app.ProdukForm(produk: widget.produk!)),
             );
           },
         ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 10),
         ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-          ),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.red, foregroundColor: Colors.white),
           child: const Text("DELETE"),
           onPressed: () => confirmHapus(),
         ),
