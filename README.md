@@ -38,27 +38,27 @@ Aplikasi mobile sederhana untuk mengelola daftar produk. Fitur utama meliputi lo
 ### Hasil Aplikasi
 
 - **Halaman Login**
-![Screenshot](login-tokokita.png)
+- ![Screenshot](login-tokokita.png)
 
 - **Halaman Register**
-![Screenshot](register-tokokita.png)
+- ![Screenshot](register-tokokita.png)
 
 - **Halaman Daftar Produk**
-![Screenshot](daftar-tokokita.png)
+- ![Screenshot](daftar-tokokita.png)
 
 - **Halaman Detail Produk**
-![Screenshot](detail-tokokita.png)
+- ![Screenshot](detail-tokokita.png)
 
 - **Halaman Edit**
-![Screenshot](edit-tokokita.png)
+- ![Screenshot](edit-tokokita.png)
 
 - **Halaman Konfirmasi Delete**
-![Screenshot](delete-tokokita.png)
+- ![Screenshot](delete-tokokita.png)
 
 - **Halaman Form Produk**
-![Screenshot](form-tokokita.png)
+- ![Screenshot](form-tokokita.png)
 
 - **Halaman Drawer (Logout)**
-![Screenshot](logout-tokokita.png)
+- ![Screenshot](logout-tokokita.png)
 
 ---
